@@ -49,7 +49,7 @@ const Benefits = () => {
       <div className="flex flex-col items-start sm:flex-row justify-between sm:items-center border border-lightblue/10 bg-lightblue/5 rounded-lg p-6 sm:p-8 gap-6 hover:bg-lightblue/10 hover:border-lightblue/20 transition-all duration-200">
         <h3 className="text-xl sm:text-2xl md:text-3xl leading-tight font-medium max-w-2xl">
           With Fynance,
-          <br /> you'll{" "}
+          <br /> you&apos;ll{" "}
           <span className="text-green">tell your money where to go,</span>{" "}
           instead of wondering where it went
         </h3>

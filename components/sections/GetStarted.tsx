@@ -12,7 +12,7 @@ const GetStarted = () => {
           </h2>
           <p className="text-lightgray/80 text-sm sm:text-base max-w-md">
             Join thousands of users who have already transformed their financial
-            lives with Fynance. It's completely free to get started.
+            lives with Fynance. It&apos;s completely free to get started.
           </p>
         </div>
 
