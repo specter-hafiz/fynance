@@ -32,10 +32,13 @@ const Benefits = () => {
         most budgeters:
       </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+      <div
+        className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12`}
+      >
         {benefits.map((benefit) => (
           <BenefitCard
             key={benefit.id}
+            id={benefit.id}
             image={benefit.src}
             description={benefit.description}
             alt={benefit.alt}
