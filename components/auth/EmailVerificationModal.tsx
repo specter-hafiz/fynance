@@ -52,11 +52,6 @@ export function EmailVerificationModal({
     }
   };
 
-  const handleCheckEmail = () => {
-    // Open default email client
-    window.location.href = "mailto:";
-  };
-
   return (
     <>
       {/* Backdrop */}
