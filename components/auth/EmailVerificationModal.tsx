@@ -95,7 +95,7 @@ export function EmailVerificationModal({
           {/* Content */}
           <div className="mb-6">
             <p className="text-gray text-sm leading-relaxed">
-              We've sent an email{" "}
+              We&lsquo;ve sent an email{" "}
               <span className="text-green font-semibold text-sm">{email}</span>{" "}
               to confirm validity of your email address.
             </p>
@@ -130,7 +130,9 @@ export function EmailVerificationModal({
 
           {/* Helper Text */}
           <div className="mt-6 text-center flex flex-col sm:flex-row justify-between items-center gap-2">
-            <p className="text-xs text-darkgray">Didn't receive any email? </p>
+            <p className="text-xs text-darkgray">
+              Didn&lsquo;t receive any email?{" "}
+            </p>
             <button
               onClick={handleResendEmail}
               disabled={isResending}

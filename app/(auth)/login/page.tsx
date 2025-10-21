@@ -24,7 +24,7 @@ const Login = () => {
             <h1 className="text-xl sm:text-2xl md:text-3xl font-medium mb-6">
               Login to your account
             </h1>
-            <form action="/welcome">
+            <form action="/dashboard">
               <div className="flex flex-col gap-6 mb-6">
                 <FormInput label="Email" name="email" id="email" />
                 <FormInput label="Password" name="password" id="password" />

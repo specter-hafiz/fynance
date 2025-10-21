@@ -418,12 +418,6 @@ const ProfileSetup = () => {
                   </button>
                 </div>
               </div>
-
-              {!canProceed() && (
-                <p className="text-xs text-red-500 mt-4 text-center sm:text-right">
-                  Please make a selection to continue
-                </p>
-              )}
             </div>
 
             {/* Illustration */}

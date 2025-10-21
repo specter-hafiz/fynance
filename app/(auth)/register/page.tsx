@@ -119,32 +119,6 @@ const Register = () => {
 
     setIsLoading(true);
     try {
-      // API call to register
-      // const response = await fetch("/api/auth/register", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify({
-      //     firstName: formData.firstName,
-      //     lastName: formData.lastName,
-      //     email: formData.email,
-      //     password: formData.password,
-      //     subscribeNewsletter: formData.subscribeNewsletter,
-      //   }),
-      // });
-
-      // if (!response.ok) {
-      //   const error = await response.json();
-      //   throw new Error(error.message || "Registration failed");
-      // }
-
-      // const data = await response.json();
-
-      // // Store access token if provided
-      // if (data.accessToken) {
-      //   localStorage.setItem("accessToken", data.accessToken);
-      // }
-
-      // Show email verification modal
       setShowVerificationModal(true);
     } catch (error: any) {
       console.error("Registration error:", error);
@@ -194,10 +168,10 @@ const Register = () => {
               {step === 1 && (
                 <>
                   <h2 className="text-base sm:text-lg md:text-xl font-medium mb-2">
-                    What's your name?
+                    What&lsquo;s your name?
                   </h2>
                   <p className="text-sm text-lightgray/80 mb-6">
-                    We'd love to know what to call you
+                    We&lsquo;d love to know what to call you
                   </p>
 
                   <form onSubmit={handleStep1Submit}>
@@ -366,7 +340,7 @@ const Register = () => {
                       <span className="text-green text-sm font-bold">1</span>
                     )}
                   </div>
-                  <p className="text-sm">Let's get acquainted</p>
+                  <p className="text-sm">Let&lsquo;s get acquainted</p>
                 </div>
 
                 <MoveRight className="text-lightgray/50" />

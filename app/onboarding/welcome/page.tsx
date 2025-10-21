@@ -18,7 +18,7 @@ const ONBOARDING_OPTIONS: OnboardingOption[] = [
     id: "full",
     title: "Full customization",
     description: "I have time, so let's set all the necessary information",
-    route: "/profile-setup",
+    route: "/onboarding/profile-setup",
   },
   {
     id: "quick",
