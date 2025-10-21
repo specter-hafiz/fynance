@@ -43,9 +43,9 @@ export function EmailVerificationModal({
       setTimeout(() => {
         setResendSuccess(false);
       }, 3000);
-    } catch (err: any) {
+    } catch (err: unknown) {
       setResendError(
-        err.message || "Failed to resend email. Please try again."
+        (err as Error).message || "Failed to resend email. Please try again."
       );
     } finally {
       setIsResending(false);

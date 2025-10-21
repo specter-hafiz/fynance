@@ -120,10 +120,11 @@ const Register = () => {
     setIsLoading(true);
     try {
       setShowVerificationModal(true);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Registration error:", error);
       setErrors({
-        email: error.message || "Registration failed. Please try again.",
+        email:
+          (error as Error).message || "Registration failed. Please try again.",
       });
     } finally {
       setIsLoading(false);
