@@ -264,7 +264,7 @@ const ProfileSetup = () => {
                           <Check className="w-4 h-4 text-black" />
                         )}
                       </div>
-                      <h3 className="text-base sm:text-lg font-medium">
+                      <h3 className="text-base sm:text-md font-medium">
                         {space.name}
                       </h3>
                     </label>
@@ -304,7 +304,7 @@ const ProfileSetup = () => {
                         )}
                       </div>
                       <div className="flex flex-col items-start text-left">
-                        <h3 className="text-base sm:text-lg font-semibold mb-1">
+                        <h3 className="text-base sm:text-md font-semibold mb-1">
                           {expense.title}
                         </h3>
                         <p className="text-sm text-lightgray/80">
@@ -319,27 +319,43 @@ const ProfileSetup = () => {
               {/* Step 3: Currency (Select) */}
               {currentStep === 3 && (
                 <div>
-                  <label
-                    htmlFor="currency"
-                    className="block text-sm mb-3 text-white"
-                  >
-                    Primary Currency
-                  </label>
-                  <select
-                    id="currency"
-                    value={selectedCurrency}
-                    onChange={(e) => setSelectedCurrency(e.target.value)}
-                    className="w-full bg-lightblue/5 border border-lightblue/10 rounded-lg py-4 px-6 text-white focus:outline-none focus:border-green transition-all"
-                  >
-                    <option value="" disabled>
-                      Choose your currency
-                    </option>
-                    {CURRENCIES.map((currency) => (
-                      <option key={currency.code} value={currency.code}>
-                        {currency.symbol} {currency.name} ({currency.code})
+                  <div className="relative w-full">
+                    <select
+                      value={selectedCurrency}
+                      onChange={(e) => setSelectedCurrency(e.target.value)}
+                      className="w-full bg-lightblue/5 border border-lightblue/10 rounded-lg py-4 pl-6 pr-12 text-white focus:outline-none focus:border-green transition-all appearance-none cursor-pointer"
+                    >
+                      <option value="" disabled className="bg-black text-white">
+                        Choose your currency
                       </option>
-                    ))}
-                  </select>
+                      {CURRENCIES.map((currency) => (
+                        <option
+                          key={currency.code}
+                          value={currency.code}
+                          className="bg-black text-white"
+                        >
+                          {currency.symbol} {currency.name} ({currency.code})
+                        </option>
+                      ))}
+                    </select>
+
+                    {/* Custom Arrow */}
+                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                      <svg
+                        className="w-5 h-5 text-lightgray/60 transition-transform duration-300"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </div>
+                  </div>
                 </div>
               )}
 
@@ -374,7 +390,7 @@ const ProfileSetup = () => {
                           <div className="w-2 h-2 rounded-full bg-black" />
                         )}
                       </div>
-                      <h3 className="text-base sm:text-lg font-medium">
+                      <h3 className="text-base sm:text-md font-medium">
                         {goal.title}
                       </h3>
                     </label>
