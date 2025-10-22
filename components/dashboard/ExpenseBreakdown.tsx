@@ -71,7 +71,7 @@ export const ExpenseBreakdown = ({
     payload,
   }: {
     active: boolean;
-    payload: any[];
+    payload: [{ name: string; value: number; color: string }];
   }) => {
     if (active && payload && payload.length) {
       return (
@@ -120,7 +120,14 @@ export const ExpenseBreakdown = ({
                 <Cell key={`cell-${index}`} fill={entry.color} />
               ))}
             </Pie>
-            <Tooltip content={<CustomTooltip active={false} payload={[]} />} />
+            <Tooltip
+              content={
+                <CustomTooltip
+                  active={false}
+                  payload={[{ name: "", value: 0, color: "" }]}
+                />
+              }
+            />
           </PieChart>
         </ResponsiveContainer>
 

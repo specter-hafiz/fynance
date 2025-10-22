@@ -43,9 +43,9 @@ export const BurnRateChart = ({
     payload,
     label,
   }: {
-    active: boolean;
-    payload: any[];
-    label: string;
+    active?: boolean;
+    payload?: Array<{ name: string; value: number; color: string }>;
+    label?: string;
   }) => {
     if (active && payload && payload.length) {
       return (
@@ -139,7 +139,16 @@ export const BurnRateChart = ({
             tickFormatter={(value) => `${value}m`}
           />
           <Tooltip
-            content={<CustomTooltip active={false} payload={[]} label={""} />}
+            content={
+              <CustomTooltip
+                active={false}
+                payload={[
+                  { name: "Burn Rate", value: 0, color: "#f97316" },
+                  { name: "Runway", value: 0, color: "#3b82f6" },
+                ]}
+                label={""}
+              />
+            }
           />
           <Area
             yAxisId="left"
