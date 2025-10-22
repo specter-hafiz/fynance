@@ -1,14 +1,7 @@
 "use client";
 
 import { TrendingDown } from "lucide-react";
-import {
-  PieChart,
-  Pie,
-  Cell,
-  ResponsiveContainer,
-  Legend,
-  Tooltip,
-} from "recharts";
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 
 // Sample expense data - replace with your actual data
 const expenseData = [
@@ -43,7 +36,14 @@ export const ExpenseBreakdown = ({
     innerRadius,
     outerRadius,
     percent,
-  }: any) => {
+  }: {
+    cx: number;
+    cy: number;
+    midAngle: number;
+    innerRadius: number;
+    outerRadius: number;
+    percent: number;
+  }) => {
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
     const x = cx + radius * Math.cos(-midAngle * (Math.PI / 180));
     const y = cy + radius * Math.sin(-midAngle * (Math.PI / 180));
@@ -66,7 +66,13 @@ export const ExpenseBreakdown = ({
   };
 
   // Custom tooltip
-  const CustomTooltip = ({ active, payload }: any) => {
+  const CustomTooltip = ({
+    active,
+    payload,
+  }: {
+    active: boolean;
+    payload: any[];
+  }) => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-black/90 border border-lightblue/20 p-3 rounded-lg shadow-lg">
@@ -81,26 +87,6 @@ export const ExpenseBreakdown = ({
       );
     }
     return null;
-  };
-
-  // Custom legend
-  const renderLegend = (props: any) => {
-    const { payload } = props;
-    return (
-      <div className="grid grid-cols-2 gap-2 mt-4">
-        {payload.map((entry: any, index: number) => (
-          <div key={`legend-${index}`} className="flex items-center gap-2">
-            <div
-              className="w-3 h-3 rounded-full flex-shrink-0"
-              style={{ backgroundColor: entry.color }}
-            />
-            <span className="text-xs text-lightgray/80 truncate">
-              {entry.value}
-            </span>
-          </div>
-        ))}
-      </div>
-    );
   };
 
   return (
@@ -134,7 +120,7 @@ export const ExpenseBreakdown = ({
                 <Cell key={`cell-${index}`} fill={entry.color} />
               ))}
             </Pie>
-            <Tooltip content={<CustomTooltip />} />
+            <Tooltip content={<CustomTooltip active={false} payload={[]} />} />
           </PieChart>
         </ResponsiveContainer>
 

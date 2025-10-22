@@ -38,7 +38,15 @@ export const BurnRateChart = ({
     data.reduce((sum, item) => sum + item.burnRate, 0) / data.length;
   const currentRunway = Math.floor(currentBalance / avgBurnRate);
 
-  const CustomTooltip = ({ active, payload, label }: any) => {
+  const CustomTooltip = ({
+    active,
+    payload,
+    label,
+  }: {
+    active: boolean;
+    payload: any[];
+    label: string;
+  }) => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-black/90 border border-lightblue/20 p-3 rounded-lg shadow-lg">
@@ -130,7 +138,9 @@ export const BurnRateChart = ({
             tick={{ fill: "#94a3b8", fontSize: 12 }}
             tickFormatter={(value) => `${value}m`}
           />
-          <Tooltip content={<CustomTooltip />} />
+          <Tooltip
+            content={<CustomTooltip active={false} payload={[]} label={""} />}
+          />
           <Area
             yAxisId="left"
             type="monotone"

@@ -58,13 +58,28 @@ export const SavingsTrackerChart = ({
   // Projection for next 6 months
   const projectedSavings = currentSavings + avgMonthlySavings * 6;
 
-  const CustomTooltip = ({ active, payload, label }: any) => {
+  const CustomTooltip = ({
+    active,
+    payload,
+    label,
+  }: {
+    active: boolean;
+    payload: Array<{ dataKey: string; value?: number }>;
+    label: string;
+  }) => {
     if (active && payload && payload.length) {
-      const actual = payload.find((p: any) => p.dataKey === "actual")?.value;
-      const target = payload.find((p: any) => p.dataKey === "target")?.value;
-      const cumulative = payload.find(
-        (p: any) => p.dataKey === "cumulative"
-      )?.value;
+      const actual =
+        payload.find(
+          (p: { dataKey: string; value?: number }) => p.dataKey === "actual"
+        )?.value ?? 0;
+      const target =
+        payload.find(
+          (p: { dataKey: string; value?: number }) => p.dataKey === "target"
+        )?.value ?? 0;
+      const cumulative =
+        payload.find(
+          (p: { dataKey: string; value?: number }) => p.dataKey === "cumulative"
+        )?.value ?? 0;
       const difference = actual - target;
 
       return (
@@ -74,13 +89,13 @@ export const SavingsTrackerChart = ({
             <div className="flex items-center justify-between gap-4">
               <span className="text-xs text-blue-400">Saved:</span>
               <span className="text-sm font-semibold text-blue-400">
-                ${actual?.toLocaleString()}
+                ${actual.toLocaleString()}
               </span>
             </div>
             <div className="flex items-center justify-between gap-4">
               <span className="text-xs text-orange-400">Target:</span>
               <span className="text-sm font-semibold text-orange-400">
-                ${target?.toLocaleString()}
+                ${target.toLocaleString()}
               </span>
             </div>
             <div className="border-t border-lightblue/20 pt-1.5 mt-1.5">
@@ -91,13 +106,13 @@ export const SavingsTrackerChart = ({
                     difference >= 0 ? "text-green" : "text-red-500"
                   }`}
                 >
-                  {difference >= 0 ? "+" : ""}${difference?.toLocaleString()}
+                  {difference >= 0 ? "+" : ""}${difference.toLocaleString()}
                 </span>
               </div>
               <div className="flex items-center justify-between gap-4 mt-1">
                 <span className="text-xs text-purple-400">Total:</span>
                 <span className="text-sm font-semibold text-purple-400">
-                  ${cumulative?.toLocaleString()}
+                  ${cumulative.toLocaleString()}
                 </span>
               </div>
             </div>
@@ -209,7 +224,15 @@ export const SavingsTrackerChart = ({
               tick={{ fill: "#94a3b8", fontSize: 12 }}
               tickFormatter={(value) => `$${value / 1000}k`}
             />
-            <Tooltip content={<CustomTooltip />} />
+            <Tooltip
+              content={
+                <CustomTooltip
+                  active={false}
+                  payload={[{ dataKey: "", value: 0 }]}
+                  label={""}
+                />
+              }
+            />
             <Area
               type="monotone"
               dataKey="actual"
@@ -259,7 +282,15 @@ export const SavingsTrackerChart = ({
               tick={{ fill: "#94a3b8", fontSize: 12 }}
               tickFormatter={(value) => `$${value / 1000}k`}
             />
-            <Tooltip content={<CustomTooltip />} />
+            <Tooltip
+              content={
+                <CustomTooltip
+                  active={false}
+                  payload={[{ dataKey: "", value: 0 }]}
+                  label={""}
+                />
+              }
+            />
             <Area
               type="monotone"
               dataKey="cumulative"
@@ -312,21 +343,22 @@ export const SavingsTrackerChart = ({
         {parseFloat(goalProgress) >= 100 ? (
           <div className="col-span-2 p-4 bg-green/10 border border-green/20 rounded-lg">
             <p className="text-sm text-green flex items-center gap-2">
-              🎉 <strong>Congratulations!</strong> You've reached your annual
-              savings goal!
+              🎉 <strong>Congratulations!</strong> You&lsquo;ve reached your
+              annual savings goal!
             </p>
           </div>
         ) : monthsAhead >= 2 ? (
           <div className="p-4 bg-green/10 border border-green/20 rounded-lg">
             <p className="text-sm text-green">
-              ✅ Great job! You're {monthsAhead} months ahead of your savings
-              target.
+              ✅ Great job! You&lsquo;re {monthsAhead} months ahead of your
+              savings target.
             </p>
           </div>
         ) : monthsAhead < 0 ? (
           <div className="p-4 bg-orange-500/10 border border-orange-500/20 rounded-lg">
             <p className="text-sm text-orange-500">
-              ⚠️ You're behind target. Consider increasing monthly savings by $
+              ⚠️ You&lsquo;re behind target. Consider increasing monthly savings
+              by $
               {Math.abs(
                 Math.floor((totalTarget - totalSaved) / data.length)
               ).toLocaleString()}
@@ -338,7 +370,7 @@ export const SavingsTrackerChart = ({
         {projectedSavings >= annualGoal && parseFloat(goalProgress) < 100 && (
           <div className="p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg">
             <p className="text-sm text-blue-500">
-              📊 At your current rate, you'll reach your goal in{" "}
+              📊 At your current rate, you&lsquo;ll reach your goal in{" "}
               {Math.ceil((annualGoal - currentSavings) / avgMonthlySavings)}{" "}
               months.
             </p>

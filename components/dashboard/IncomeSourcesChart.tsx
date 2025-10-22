@@ -25,7 +25,13 @@ export const IncomeSourcesChart = ({
 }: IncomeSourcesChartProps) => {
   const totalIncome = data.reduce((sum, item) => sum + item.value, 0);
 
-  const CustomTooltip = ({ active, payload }: any) => {
+  const CustomTooltip = ({
+    active,
+    payload,
+  }: {
+    active: boolean;
+    payload: [{ name: string; value: number; color: string }];
+  }) => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-black/90 border border-lightblue/20 p-3 rounded-lg shadow-lg">
@@ -74,7 +80,14 @@ export const IncomeSourcesChart = ({
                 />
               ))}
             </Pie>
-            <Tooltip content={<CustomTooltip />} />
+            <Tooltip
+              content={
+                <CustomTooltip
+                  active={false}
+                  payload={[{ name: "", value: 0, color: "" }]}
+                />
+              }
+            />
           </PieChart>
         </ResponsiveContainer>
 

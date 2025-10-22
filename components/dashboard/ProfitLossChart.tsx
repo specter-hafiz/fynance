@@ -37,27 +37,40 @@ export const ProfitLossChart = ({
   const totalProfit = data.reduce((sum, item) => sum + item.profit, 0);
   const avgProfit = totalProfit / data.length;
 
-  const CustomTooltip = ({ active, payload, label }: any) => {
+  const CustomTooltip = ({
+    active,
+    payload,
+    label,
+  }: {
+    active: boolean;
+    payload: [];
+    label: string;
+  }) => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-black/90 border border-lightblue/20 p-3 rounded-lg shadow-lg">
           <p className="text-sm font-medium text-white mb-2">{label}</p>
-          {payload.map((entry: any, index: number) => (
-            <div
-              key={index}
-              className="flex items-center justify-between gap-4"
-            >
-              <span className="text-xs" style={{ color: entry.color }}>
-                {entry.name}:
-              </span>
-              <span
-                className="text-sm font-semibold"
-                style={{ color: entry.color }}
+          {payload.map(
+            (
+              entry: { name: string; value: number; color: string },
+              index: number
+            ) => (
+              <div
+                key={index}
+                className="flex items-center justify-between gap-4"
               >
-                ${entry.value.toLocaleString()}
-              </span>
-            </div>
-          ))}
+                <span className="text-xs" style={{ color: entry.color }}>
+                  {entry.name}:
+                </span>
+                <span
+                  className="text-sm font-semibold"
+                  style={{ color: entry.color }}
+                >
+                  ${entry.value.toLocaleString()}
+                </span>
+              </div>
+            )
+          )}
         </div>
       );
     }
@@ -94,7 +107,9 @@ export const ProfitLossChart = ({
             tick={{ fill: "#94a3b8", fontSize: 12 }}
             tickFormatter={(value) => `$${value / 1000}k`}
           />
-          <Tooltip content={<CustomTooltip />} />
+          <Tooltip
+            content={<CustomTooltip active={false} payload={[]} label={""} />}
+          />
           <Legend wrapperStyle={{ paddingTop: "20px" }} iconType="circle" />
           <ReferenceLine y={0} stroke="#666" />
           <Bar dataKey="income" fill="#10b981" radius={[4, 4, 0, 0]} />

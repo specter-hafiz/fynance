@@ -49,7 +49,15 @@ export const MonthlyTrendsChart = ({
   const incomeGrowth = calculateGrowth(data.map((d) => d.income));
   const expenseGrowth = calculateGrowth(data.map((d) => d.expenses));
 
-  const CustomTooltip = ({ active, payload, label }: any) => {
+  const CustomTooltip = ({
+    active,
+    payload,
+    label,
+  }: {
+    active: boolean;
+    payload: { [key: string]: { value: number } };
+    label: string;
+  }) => {
     if (active && payload && payload.length) {
       const income = payload[0].value;
       const expenses = payload[1].value;
@@ -151,7 +159,9 @@ export const MonthlyTrendsChart = ({
             tick={{ fill: "#94a3b8", fontSize: 12 }}
             tickFormatter={(value) => `$${value / 1000}k`}
           />
-          <Tooltip content={<CustomTooltip />} />
+          <Tooltip
+            content={<CustomTooltip active={false} payload={{}} label={""} />}
+          />
           <Legend wrapperStyle={{ paddingTop: "20px" }} iconType="line" />
           <Line
             type="monotone"
